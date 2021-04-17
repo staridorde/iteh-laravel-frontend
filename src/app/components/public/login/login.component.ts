@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder, 
               private http: HttpClient, 
-              private router: Router) { }
+              private router: Router, 
+              private auth: AuthService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -26,25 +28,6 @@ export class LoginComponent implements OnInit {
   submit() {
     const formData = this.form.getRawValue();
 
-    const data = {
-      username: formData.email,
-      password: formData.password,
-      grant_type: 'password',
-      client_id: 2,
-      client_secret: 'IGqq94LXjhVRhMUTRJMkvC0bFaFJGtUB3ARp8G6s',
-      scope: '*'
-    };
-    
-    this.http.post('http://localhost:8000/oauth/token', data).subscribe(
-      (result: any) => {
-        localStorage.setItem('token', result.access_token);
-        this.router.navigate(['/secure']);
-      },
-      error => { 
-        console.log(data);
-        console.log('error');
-        console.log(error);
-      }
-    )
+    this.auth.login(formData);
   }
 }

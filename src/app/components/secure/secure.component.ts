@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-secure',
@@ -12,21 +13,12 @@ export class SecureComponent implements OnInit {
 
 
   constructor(private http: HttpClient, 
-              private router: Router) {}
+              private router: Router,
+              private user_service: UserService) {}
 
   ngOnInit(): void {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    })
 
-    this.http.get('http://localhost:8000/user', {headers: headers}).subscribe(
-      (result) => {
-        console.log(result);
-      },
-      (err) => {
-        localStorage.removeItem('token');
-        this.router.navigate(['/login']);
-      }
-    ); 
+    this.user_service.getUser();
+    
   }
 }
