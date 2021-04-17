@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../user/user.service';
+import { BudgetApiService } from '../API/budget/budget-api.service';
+import { UserService } from '../API/user/user.service';
+import { BudgetService } from '../budget/budget.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,9 @@ export class AuthService {
 
   constructor(private router: Router, 
               private http: HttpClient,
-              private user_service: UserService) { }
+              private user_service: UserService,
+              private budget_service: BudgetService,
+              private budget_api_service: BudgetApiService) { }
 
 
   login(data: any) {
@@ -26,10 +30,13 @@ export class AuthService {
     this.http.post('http://localhost:8000/oauth/token', var_data).subscribe(
       (result: any) => {
         this.user_service.token = result.access_token;
+        this.budget_api_service.getBudget().subscribe(
+          (data: any) => {this.budget_service.budget = data;}
+        );
 
 
         // localStorage.setItem('token', result.access_token);
-        this.router.navigate(['/secure']);
+        this.router.navigate(['/secure/budget']);
       },
       error => { 
         console.log(data);

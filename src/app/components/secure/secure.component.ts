@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/services/user/user.service';
+import { UserService } from 'src/app/services/API/user/user.service';
 
 @Component({
   selector: 'app-secure',

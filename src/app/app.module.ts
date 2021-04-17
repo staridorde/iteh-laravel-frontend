@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { PublicComponent } from './components/public/public.component';
 import { PublicModule } from './components/public/public.module';
 import { SecureComponent } from './components/secure/secure.component';
+import { BudgetComponent } from './componenets/secure/budget/budget.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PublicComponent,
     SecureComponent,
+    BudgetComponent,
   ],
   imports: [
     BrowserModule,

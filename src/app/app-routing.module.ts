@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BudgetComponent } from './componenets/secure/budget/budget.component';
 import { HomeComponent } from './components/public/home/home.component';
 import { LoginComponent } from './components/public/login/login.component';
 import { PublicComponent } from './components/public/public.component';
@@ -19,7 +20,10 @@ const routes: Routes = [
   },
   {
     path: 'secure',
-    component: SecureComponent
+    component: SecureComponent,
+    children: [
+      {path: 'budget', component: BudgetComponent}
+    ]
   }
 ];
 
