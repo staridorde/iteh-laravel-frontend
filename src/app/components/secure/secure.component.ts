@@ -1,15 +1,32 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-secure',
   templateUrl: './secure.component.html',
-  styleUrls: ['./secure.component.css']
+  styleUrls: ['./secure.component.css'],
 })
 export class SecureComponent implements OnInit {
 
-  constructor() { }
+
+
+  constructor(private http: HttpClient, 
+              private router: Router) {}
 
   ngOnInit(): void {
-  }
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    })
 
+    this.http.get('http://localhost:8000/user', {headers: headers}).subscribe(
+      (result) => {
+        console.log(result);
+      },
+      (err) => {
+        localStorage.removeItem('token');
+        this.router.navigate(['/login']);
+      }
+    ); 
+  }
 }

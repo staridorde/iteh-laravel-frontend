@@ -12,7 +12,7 @@ import { SecureComponent } from './components/secure/secure.component';
   declarations: [
     AppComponent,
     PublicComponent,
-    SecureComponent
+    SecureComponent,
   ],
   imports: [
     BrowserModule,
