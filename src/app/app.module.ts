@@ -6,8 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PublicComponent } from './components/public/public.component';
 import { PublicModule } from './components/public/public.module';
+import { BudgetComponent } from './components/secure/budget/budget.component';
 import { SecureComponent } from './components/secure/secure.component';
-import { BudgetComponent } from './componenets/secure/budget/budget.component';
 
 @NgModule({
   declarations: [

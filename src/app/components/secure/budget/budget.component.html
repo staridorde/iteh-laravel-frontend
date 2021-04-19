@@ -1,0 +1,10 @@
+<div>
+    <h1>{{ this.user_service.user.name}}</h1>
+
+    <div class="row">
+        <div *ngFor="let budgetItem of budget.items" class="col-12">
+            {{ budgetItem.name }}
+            {{ budgetItem.amount }}
+        </div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BudgetComponent } from './componenets/secure/budget/budget.component';
+import { BudgetComponent } from './components/secure/budget/budget.component';
 import { HomeComponent } from './components/public/home/home.component';
 import { LoginComponent } from './components/public/login/login.component';
 import { PublicComponent } from './components/public/public.component';

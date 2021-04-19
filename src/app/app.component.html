@@ -6,8 +6,8 @@
     </ul>
 
     <div class="navbar-nav">
-        <a class="nav-link" routerLink="/login" *ngIf="!loggedIn">Login</a>
-        <a class="nav-link" routerLink="/" *ngIf="loggedIn" (click)="logout()">Logout</a>
+        <a class="nav-link" routerLink="/login" *ngIf="!this.user_service.loggedIn">Login</a>
+        <a class="nav-link" routerLink="/" *ngIf="this.user_service.loggedIn" (click)="logout()">Logout</a>
     </div>
 </nav>
 

@@ -12,7 +12,11 @@ export class BudgetApiService {
   constructor(private http: HttpClient, 
               private router: Router) {}
 
-  getBudget() {
-    return this.http.get(`${this.url}s`);
+  getBudgets() {
+    return this.http.get(this.url);
+  }
+
+  getBudgetItems(id: number) {
+    return this.http.get(`${this.url}/${id}`);
   }
 }

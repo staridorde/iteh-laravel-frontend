@@ -23,16 +23,28 @@ export class AuthService {
       password: data.password,
       grant_type: 'password',
       client_id: 2,
-      client_secret: 'IGqq94LXjhVRhMUTRJMkvC0bFaFJGtUB3ARp8G6s',
+      client_secret: 'Wmm4W4v0isJpnW4WHp2xeF4dVnN9yRbIlznXgadt',
       scope: '*'
     };
     
     this.http.post('http://localhost:8000/oauth/token', var_data).subscribe(
       (result: any) => {
         this.user_service.token = result.access_token;
-        this.budget_api_service.getBudget().subscribe(
-          (data: any) => {this.budget_service.budget = data;}
-        );
+        this.user_service.loggedIn = true;
+        this.user_service.getUser();
+        this.budget_service.getData(this.user_service.user.id);
+
+
+
+        // console.log(this.user_service.user);
+        // console.log(this.budget_service.budget);
+
+        // this.budget_api_service.getBudget().subscribe(
+        //   (data: any) => {
+        //     console.log(data);
+        //     this.budget_service.budget = data;
+        //   }
+        // );
 
 
         // localStorage.setItem('token', result.access_token);
@@ -51,6 +63,6 @@ export class AuthService {
       result => console.log(result),
       err => console.log(err)
     )
-  }
+  } 
 
 }

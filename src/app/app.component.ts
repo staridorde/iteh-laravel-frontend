@@ -1,19 +1,17 @@
+import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
 import { Component, OnInit } from '@angular/core';
+import { UserService } from './services/API/user/user.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent{
 
-  loggedIn = false;
-
-  ngOnInit() {
-    this.loggedIn = localStorage.getItem('token') !== null;
-  }
+  constructor(public user_service: UserService) { }
 
   logout() {
-    localStorage.removeItem('token');
+    this.user_service.logout();
   }
 }
