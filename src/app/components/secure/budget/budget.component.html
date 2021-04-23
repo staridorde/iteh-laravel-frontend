@@ -1,29 +1,75 @@
 <div>
   <h1>{{ this.user_service.user.name }}</h1>
 
-  <h1>{{ this.budget.total_amount }}</h1>
+  <h1 *ngIf="this.budget.total_amount === 0">
+    Please add your first budget item!
+  </h1>
+  <h1 *ngIf="this.budget.total_amount !== 0">{{ this.budget.total_amount }}</h1>
 
-  <div >
-      <ng-container class="list-group d-flex flex-row" *ngFor="let budgetItem of this.budget.items">
-        <div
+  <div>
+    <ng-container
+      class="list-group d-flex flex-row"
+      *ngFor="let budgetItem of this.budget.items"
+    >
+      <div
         class="list-group-item-success p-2 mb-1 d-flex justify-content-between"
         *ngIf="budgetItem.type === 'income'"
-        >
-          <h6>{{ budgetItem.item_name }}</h6>
+      >
+        <h4>{{ budgetItem.item_name }}</h4>
+        <div class="d-flex flex-row justify-content-center">
           <p>{{ budgetItem.amount }}</p>
+          <!-- <div class="d-flex justify-content-end"> -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            class="bi bi-x ml-2"
+            viewBox="0 0 16 16"
+            (click)="deleteItem(budgetItem)"
+          >
+            <path
+              d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+            />
+          </svg>
+          <!-- </div> -->
         </div>
+      </div>
 
-        <div
+      <div
         class="list-group-item-danger p-2 mb-1 d-flex justify-content-between"
         *ngIf="budgetItem.type === 'outcome'"
-          >
-          <h6>{{ budgetItem.item_name }}</h6>
+      >
+        <h4>{{ budgetItem.item_name }}</h4>
+        <div class="d-flex flex-row justify-content-center">
           <p>{{ budgetItem.amount }}</p>
+          <!-- <div class="d-flex justify-content-end"> -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            class="bi bi-x ml-2"
+            viewBox="0 0 16 16"
+            (click)="deleteItem(budgetItem)"
+          >
+            <path
+              d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+            />
+          </svg>
+          <!-- </div> -->
         </div>
-    </ng-container>  
+      </div>
+    </ng-container>
   </div>
-  
+
   <router-outlet></router-outlet>
 
-  <a routerLink="/secure/budget/new-item" class="btn btn-primary" role="button" *ngIf="!formActive">Add budget item</a>
+  <a
+    routerLink="/secure/budget/new-item"
+    class="btn btn-primary"
+    role="button"
+    *ngIf="!formActive"
+    >Add budget item</a
+  >
 </div>

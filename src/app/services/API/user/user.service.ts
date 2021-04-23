@@ -45,5 +45,6 @@ export class UserService {
   logout() {
     this.token = '';
     this.loggedIn = false;
+    this.router.navigate(['/login']);
   }
 }

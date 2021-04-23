@@ -28,4 +28,12 @@ export class BudgetApiService {
   saveBudgetItem(data: any) {
     return this.http.post(`${this.budget_item_url}`, data);
   }
+
+  newBudget(data: any) {
+    return this.http.post(`${this.budget_url}`, data);
+  }
+
+  deleteItem(data: any) {
+    return this.http.delete(`${this.budget_item_url}/${data.id}`);
+  }
 }

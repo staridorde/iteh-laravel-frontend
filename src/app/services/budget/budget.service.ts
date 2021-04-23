@@ -13,7 +13,6 @@ export class BudgetService {
 
   constructor(private budget_api_service: BudgetApiService) {
     this.budget = new Budget();
-
   }
 
   getData(id: number) {
@@ -25,9 +24,6 @@ export class BudgetService {
 
       this.calculateTotalAmount();
 
-      console.log("Added new item");
-      console.log(this.budget);
-
       this.ready = true;
     });
   }
@@ -35,21 +31,22 @@ export class BudgetService {
   calculateTotalAmount() {
     this.budget.total_amount = 0;
     this.budget.items.map((budgetItem) => {
-      this.budget.total_amount += +budgetItem.amount;
-
+      if(budgetItem.type === 'income') {
+        this.budget.total_amount += +budgetItem.amount;
+      }
+      if(budgetItem.type === 'outcome') {
+        this.budget.total_amount -= +budgetItem.amount;
+      }
     });
   }
 
   saveBudgetItem(budget_item: any) {
     budget_item.budget_id = this.budget.id;
 
-    const obs = this.budget_api_service.saveBudgetItem(budget_item); 
-    // obs.subscribe(
-    //   (data:any) => {
-        // this.budget.items.push(data);
-        // this.calculateTotalAmount();
-    //   }
-    // )
-    return obs;
+    return this.budget_api_service.saveBudgetItem(budget_item);
+  }
+
+  deleteItem(data: any) {
+    return this.budget_api_service.deleteItem(data);
   }
 }

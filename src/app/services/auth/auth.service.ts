@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Budget } from 'src/app/models/budget';
 import { BudgetApiService } from '../API/budget/budget-api.service';
 import { UserService } from '../API/user/user.service';
 import { BudgetService } from '../budget/budget.service';
@@ -23,7 +24,7 @@ export class AuthService {
       password: data.password,
       grant_type: 'password',
       client_id: 2,
-      client_secret: 'Wmm4W4v0isJpnW4WHp2xeF4dVnN9yRbIlznXgadt',
+      client_secret: 'OIlj3zkHwSPXKptqSZRDvvazorSLQ4PdjvU1oDFB',
       scope: '*'
     };
     
@@ -60,7 +61,19 @@ export class AuthService {
 
   register(data: any) {
     this.http.post('http://localhost:8000/register', data).subscribe(
-      result => console.log(result),
+      (result:any) => {
+        const new_budget = {
+          user_id: result.id
+        }
+
+        this.budget_api_service.newBudget(new_budget).subscribe(
+          result => {
+            console.log(result);
+
+            this.router.navigate(['/login']);
+          }
+        );
+      },
       err => console.log(err)
     )
   } 
