@@ -1,10 +1,29 @@
 <div>
-    <h1>{{ this.user_service.user.name}}</h1>
+  <h1>{{ this.user_service.user.name }}</h1>
 
-    <div class="row">
-        <div *ngFor="let budgetItem of budget.items" class="col-12">
-            {{ budgetItem.name }}
-            {{ budgetItem.amount }}
+  <h1>{{ this.budget.total_amount }}</h1>
+
+  <div >
+      <ng-container class="list-group d-flex flex-row" *ngFor="let budgetItem of this.budget.items">
+        <div
+        class="list-group-item-success p-2 mb-1 d-flex justify-content-between"
+        *ngIf="budgetItem.type === 'income'"
+        >
+          <h6>{{ budgetItem.item_name }}</h6>
+          <p>{{ budgetItem.amount }}</p>
         </div>
-    </div>
+
+        <div
+        class="list-group-item-danger p-2 mb-1 d-flex justify-content-between"
+        *ngIf="budgetItem.type === 'outcome'"
+          >
+          <h6>{{ budgetItem.item_name }}</h6>
+          <p>{{ budgetItem.amount }}</p>
+        </div>
+    </ng-container>  
+  </div>
+  
+  <router-outlet></router-outlet>
+
+  <a routerLink="/secure/budget/new-item" class="btn btn-primary" role="button" *ngIf="!formActive">Add budget item</a>
 </div>

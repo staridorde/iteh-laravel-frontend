@@ -1,0 +1,24 @@
+<div class="container w-50">
+  <form [formGroup]="form">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="name" formControlName="item_name" />
+    </div>
+
+    <div class="form-group">
+      <label for="amount">Amount:</label>
+      <input type="text" class="form-control" id="amount" formControlName="amount" />
+    </div>
+
+    <div class="form-group">
+      <label for="type">Type:</label>
+      <select class="form-control" id="type" formControlName="type">
+        <option value="income">Income</option>
+        <option value="outcome">Outcome</option>
+    </select>
+    </div>
+
+    <button routerLink="/secure/budget" type="button" class="btn btn-primary" (click)="onSubmit()">Add new item</button>
+    
+  </form>
+</div>
