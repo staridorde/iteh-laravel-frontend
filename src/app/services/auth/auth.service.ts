@@ -24,7 +24,7 @@ export class AuthService {
       password: data.password,
       grant_type: 'password',
       client_id: 2,
-      client_secret: 'OIlj3zkHwSPXKptqSZRDvvazorSLQ4PdjvU1oDFB',
+      client_secret: 'JrblsMRiz6FAlRTlocIkAFQKRZcFKceVm1qCHH7y',
       scope: '*'
     };
     
